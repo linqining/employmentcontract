@@ -1,7 +1,6 @@
 module employmentcontract::offer;
 
 use std::string::{String};
-use qualification::cfa::{CFACertificate};
 use sui::event;
 use sui::clock::Clock;
 
@@ -41,7 +40,7 @@ public entry fun offer(applicant:address, blob_id :String,deadline_ms:u64,  ctx:
 }
 
 // sign offer
-public entry fun sign_offer(clock: &Clock,offer:&Offer,_:&CFACertificate,  ctx:&mut TxContext){
+public entry fun sign_offer(clock: &Clock,offer:&Offer, ctx:&mut TxContext){
     let current_ms = clock.timestamp_ms();
     assert!(offer.deadline_ms>current_ms,0x1);  // 超过期限
     let contract_employee = Contract{
